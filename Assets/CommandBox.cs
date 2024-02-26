@@ -8,7 +8,8 @@ public class CommandBox : MonoBehaviour
 
     public void OnActive()
     {
-        box.LeanMoveLocalY(0, 0.5f).setEaseOutExpo().delay = 0.1f;
+        box.LeanMoveLocalY(0, 0.5f).setEaseOutExpo().setOnComplete( () 
+        => { Time.timeScale = 0; } ).delay = 0.1f;
     }
 
     public void OpenBox()

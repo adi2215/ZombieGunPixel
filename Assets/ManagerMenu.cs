@@ -37,13 +37,18 @@ public class ManagerMenu : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.K))
         {
             if (info != null)
+            {
                 info.onClick.Invoke();
+            }
         }
 
         else if (Input.GetKeyDown(KeyCode.L))
         {
             if (rule != null)
+            {
+                Time.timeScale = 1;
                 rule.onClick.Invoke();
+            }
         }
     }
 
