@@ -24,6 +24,6 @@ MonoBehaviour:
   YoucantShoot: 0
   countFuel: 0
   BatBullet: 1
-  GranateCount: 2
+  GranateCount: 0
   bossHp: 100
   speedHero: 0

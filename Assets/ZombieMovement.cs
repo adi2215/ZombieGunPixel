@@ -56,18 +56,49 @@ public class ZombieMovement : MonoBehaviour
 
     public AudioSource enemySound;
 
+    public AudioClip[] audioClips;
+
+    GameObject player;
+
     void Start()
     {
-        StartCoroutine(PlayEnemySoundRepeatedly(5f));
+        player = GameObject.FindGameObjectWithTag("Hero");
+        StartCoroutine(PlayEnemySoundRepeatedly(Random.Range(5, 9)));
+    }
+
+    public float minDist = 1;
+    public float maxDist = 10;
+ 
+    void Update()
+    {
+        float dist = Vector3.Distance(transform.position, player.transform.position);
+ 
+        if(dist < minDist)
+        {
+            enemySound.volume = 0.14f;
+        }
+        else if(dist > maxDist)
+        {
+            enemySound.volume = 0;
+        }
+        else
+        {
+            enemySound.volume = 0.14f - ((dist - minDist) / (maxDist - minDist));
+        }
     }
 
     IEnumerator PlayEnemySoundRepeatedly(float interval)
     {
-        if (enemySound != null)
+        if (enemySound != null && audioClips.Length > 0)
         {
 
             while (true)
             {
+                int randomIndex = Random.Range(0, audioClips.Length);
+                Debug.Log(randomIndex);
+            
+                enemySound.clip = audioClips[randomIndex];
+
                 enemySound.Play();
 
                 yield return new WaitForSeconds(interval);

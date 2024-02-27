@@ -11,6 +11,8 @@ public class CoinSystem : MonoBehaviour, Collectible
     public GameObject coinEffect;
     public Data data;
     public bool taking = false;
+    public AudioSource audioPlayer;
+
     private void Start()
     {
         Target = GameObject.FindGameObjectWithTag("Hero");
@@ -37,7 +39,8 @@ public class CoinSystem : MonoBehaviour, Collectible
 
     IEnumerator TakingCoin()
     {
-        yield return new WaitForSeconds(0.1f);
+        audioPlayer.Play();
+        yield return new WaitForSeconds(0.3f);
         data.countCoins += 1;
         Debug.Log("TakeCoin");
         CoinCollect();

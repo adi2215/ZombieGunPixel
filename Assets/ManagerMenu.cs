@@ -12,21 +12,22 @@ public class ManagerMenu : MonoBehaviour
 
     public Button info, rule;
 
-    public void BackToMenu() => StartCoroutine(LoadLevelNext(0));
+    public void TimeGo() => Time.timeScale = 1;
+    
+    public void BackToMenu() 
+    {
+        data.DialogManager = false;
+        data.countFuel = 0;
+        data.countCoins = 0;
+        StartCoroutine(LoadLevelNext(0));
+     }
+
     public void GoToGame() => StartCoroutine(LoadLevelNext(1));
     public void ExitToGame() => Application.Quit();
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            BackToMenu();
-            data.DialogManager = false;
-            data.countFuel = 0;
-            data.countCoins = 0;
-        }
-
-        else if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift))
+        if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift))
         {
             data.countFuel = 0;
             data.countCoins = 0;
@@ -34,7 +35,7 @@ public class ManagerMenu : MonoBehaviour
             LoadLevel(SceneManager.GetActiveScene().buildIndex);
         }
 
-        else if (Input.GetKeyDown(KeyCode.K))
+        else if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (info != null)
             {

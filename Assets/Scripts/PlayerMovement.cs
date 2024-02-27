@@ -52,6 +52,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform aimGranatePos;
     public int currentGun;
     public int patrons;
+    private int numberGranate;
 
 
     //LogicalCheck
@@ -88,6 +89,7 @@ public class PlayerMovement : MonoBehaviour
         currentGun = 0;
         patrons = 9;
         weapon.SortGun(currentGun);
+        numberGranate = data.GranateCount;
     }
 
     public void SpeedInc() 
@@ -263,13 +265,13 @@ public class PlayerMovement : MonoBehaviour
             });
         }
 
-        if (Input.GetMouseButtonDown(2) && data.GranateCount > 0 && timebetGranate < 0)
+        if (Input.GetMouseButtonDown(2) && numberGranate > 0 && timebetGranate < 0)
         {
             timebetGranate = timebetTimeGranate;
             Vector3 mousePosition = shooTing;
 
-            data.GranateCount--;
-            countGranates.text = data.GranateCount.ToString();
+            numberGranate--;
+            countGranates.text = numberGranate.ToString();
             GranadeExplosion();
 
             OnShootGranate?.Invoke(this, new OnShootEventsArg {

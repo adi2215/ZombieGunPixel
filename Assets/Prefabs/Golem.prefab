@@ -356,10 +356,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b41c9dc269e64c49ad56a517e1138a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 10
+  health: 6
   effect: {fileID: 5800905953750762035, guid: 5a208ad3717aecd4da58a6efb5e00012, type: 3}
   parentObject: {fileID: 7306170377416609110}
   coins: {fileID: 5786879929547647122, guid: 5d8cc1b96ee474942be5455696859c73, type: 3}
   enemyAI: {fileID: 0}
   rb: {fileID: 6229231350255291771}
   colliderCps: {fileID: 5587542556949872328}
+  healthBoss: {fileID: 0}
+  data: {fileID: 0}
+  sceneNew: {fileID: 0}
