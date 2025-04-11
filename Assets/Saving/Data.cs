@@ -6,6 +6,8 @@ using UnityEngine.TextCore.Text;
 [CreateAssetMenu]
 public class Data : ScriptableObject
 {
+    public Color[] colors;
+    public int skinIndex;
     public int hpHero;
     public int currentHealth;
     public int countCoins;
@@ -20,4 +22,5 @@ public class Data : ScriptableObject
     public int GranateCount;
     public int bossHp;
     public float speedHero;
+    public int killedZombie;
 }

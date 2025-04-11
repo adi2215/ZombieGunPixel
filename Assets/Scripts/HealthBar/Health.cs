@@ -107,7 +107,6 @@ public class Health : MonoBehaviour
         Player.enabled = false;
         enabled = false;
         data.countFuel = 0;
-        data.countCoins = 0;
         SetTimeScale(0.4f);
         StartCoroutine(NewScene());
     }

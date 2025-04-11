@@ -12,15 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32cc22a37b4340141a13131d252e9d3e, type: 3}
   m_Name: DataManager
   m_EditorClassIdentifier: 
+  colors:
+  - {r: 0.78039217, g: 0.56078434, b: 0.4745098, a: 1}
+  - {r: 1, g: 0.79607844, b: 0.7137255, a: 1}
+  - {r: 1, g: 0.9137255, b: 0.88235295, a: 1}
+  skinIndex: 0
   hpHero: 4
-  currentHealth: 4
-  countCoins: 0
+  currentHealth: 3
+  countCoins: 18
   DialogManager: 0
   guns:
   - {fileID: 11400000, guid: 75e61e90ac14c07408ff83cd512cd08c, type: 2}
+  - {fileID: 11400000, guid: 7f6bc46dc5a94374581eebd2aa59915a, type: 2}
   itemChachedl: 0
-  damage: 1
-  destroyBullet: 0.4
+  damage: 2
+  destroyBullet: 0.7
   YoucantShoot: 0
   countFuel: 0
   BatBullet: 1

@@ -80,7 +80,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b41c9dc269e64c49ad56a517e1138a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 2
+  health: 3
   effect: {fileID: 5800905953750762035, guid: 5a208ad3717aecd4da58a6efb5e00012, type: 3}
   parentObject: {fileID: 2736509719121308941}
   coins: {fileID: 5786879929547647122, guid: 5d8cc1b96ee474942be5455696859c73, type: 3}
@@ -406,8 +406,6 @@ MonoBehaviour:
   currentSpeed: 2
   speed: 3.5
   enemySound: {fileID: 3937705808386384599}
-  audioClips:
-  - {fileID: 8300000, guid: f19a7a8967b6932479973bfe56c141e3, type: 3}
 --- !u!114 &6666590733988859188
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -676,8 +674,6 @@ MonoBehaviour:
   radius: 0.7
   explosionForce: 0
   explosionForceZombie: 0
-  Shockwave: {fileID: 0}
-  Target: {fileID: 0}
 --- !u!1 &7223430207757928236
 GameObject:
   m_ObjectHideFlags: 0

@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TheEnd.unity
     guid: eb098058e2b866741b1c3c8de5338cc8
+  - enabled: 1
+    path: Assets/Scenes/InfinityLevel.unity
+    guid: 004ab6018e6a35248b104a9f9ca41cf4
   m_configObjects: {}

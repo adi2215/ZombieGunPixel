@@ -52,7 +52,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform aimGranatePos;
     public int currentGun;
     public int patrons;
-    private int numberGranate;
 
 
     //LogicalCheck
@@ -89,7 +88,8 @@ public class PlayerMovement : MonoBehaviour
         currentGun = 0;
         patrons = 9;
         weapon.SortGun(currentGun);
-        numberGranate = data.GranateCount;
+        SpriteRenderer spriteColor = GetComponent<SpriteRenderer>();
+        spriteColor.color = data.colors[data.skinIndex];
     }
 
     public void SpeedInc() 
@@ -223,11 +223,15 @@ public class PlayerMovement : MonoBehaviour
         transform.Rotate(0f, 180f, 0f);
     }
 
+    [SerializeField] private Joystick joystick;
+    private bool shootButton = false;
+
     void ProcessInputs()
     {
-        horizontalValue = Input.GetAxisRaw("Horizontal");
-        verticalValue = Input.GetAxisRaw("Vertical");
-        movementInput = new Vector2(horizontalValue, verticalValue);
+        float horizontal = joystick.Horizontal != 0 ? joystick.Horizontal : Input.GetAxisRaw("Horizontal");
+        float vertical = joystick.Vertical != 0 ? joystick.Vertical : Input.GetAxisRaw("Vertical");
+
+        movementInput = new Vector2(horizontal, vertical);
         movementSpeed = Mathf.Clamp(movementInput.magnitude, 0.0f, 1.0f);
 
         movementInput.Normalize();
@@ -239,60 +243,95 @@ public class PlayerMovement : MonoBehaviour
         }
         //data.moveIdle = false;
     }
+
     //---------------------------------------------------------------------
 
+    public void ShootMobile() => shootButton = true;
 
 
     //Aim and Shooting---------------------------------------------------------------------
-    private void Shooting()
+public void Shooting()
+{
+    timebet -= Time.deltaTime;
+    timebetGranate -= Time.deltaTime;
+
+    if ((Input.GetMouseButtonDown(0) || shootButton) && timebet < 0 && weaponPatrons > 0)
     {
-        timebet -= Time.deltaTime;
-        timebetGranate -= Time.deltaTime;
-        if (Input.GetMouseButtonDown(0) && timebet < 0 && weaponPatrons > 0)
+        timebet = timebetTime;
+        
+        Vector3 targetPosition = GetAutoAimTarget(); // 🎯 Автонаведение
+
+        aimAnimator[currentGun].SetTrigger("ShootPistol");
+        cam.SetBool("ShootCam", true);
+        weaponPatrons--;
+        shootSound.Play();
+        gunLight[currentGun].SetActive(true);
+        
+        OnShoot?.Invoke(this, new OnShootEventsArgs {
+            gunEndPointPosition = aimGunEndPosintTransform[currentGun].position,
+            shootPosition = targetPosition,
+        });
+
+        shootButton = false;
+    }
+
+    if (Input.GetMouseButtonDown(2) && data.GranateCount > 0 && timebetGranate < 0)
+    {
+        timebetGranate = timebetTimeGranate;
+
+        Vector3 targetPosition = GetAutoAimTarget(); // 🎯 Тоже автонаведение
+
+        data.GranateCount--;
+        countGranates.text = data.GranateCount.ToString();
+        GranadeExplosion();
+
+        OnShootGranate?.Invoke(this, new OnShootEventsArg {
+            PlayerEndPointPosition = aimGranatePos.position,
+            shootPosition = targetPosition,
+        });
+    }
+
+    if (weaponPatrons <= 0 && Input.GetMouseButtonDown(0) && !ActualReload)
+    {
+        RealodAnim.SetTrigger("Patrons");
+        ActualReload = true;
+        Reload.Play();
+    }
+
+    if (timebet < 0)
+    {
+        cam.SetBool("ShootCam", false);
+        gunLight[currentGun].SetActive(false);
+    }
+}
+
+
+    private Vector3 GetAutoAimTarget()
+{
+    GameObject[] enemies = GameObject.FindGameObjectsWithTag("Zombie");
+    Transform closestEnemy = null;
+    float minDistance = Mathf.Infinity;
+    Vector3 currentPosition = transform.position;
+
+    foreach (GameObject enemy in enemies)
+    {
+        float distance = Vector2.Distance(currentPosition, enemy.transform.position);
+        if (distance < minDistance)
         {
-            timebet = timebetTime;
-            Vector3 mousePosition = shooTing;
-
-            aimAnimator[currentGun].SetTrigger("ShootPistol");
-            cam.SetBool("ShootCam", true);
-            weaponPatrons--;
-            shootSound.Play();
-            gunLight[currentGun].SetActive(true);
-            
-            OnShoot?.Invoke(this, new OnShootEventsArgs {
-                gunEndPointPosition = aimGunEndPosintTransform[currentGun].position, 
-                shootPosition = mousePosition,
-            });
-        }
-
-        if (Input.GetMouseButtonDown(2) && numberGranate > 0 && timebetGranate < 0)
-        {
-            timebetGranate = timebetTimeGranate;
-            Vector3 mousePosition = shooTing;
-
-            numberGranate--;
-            countGranates.text = numberGranate.ToString();
-            GranadeExplosion();
-
-            OnShootGranate?.Invoke(this, new OnShootEventsArg {
-                PlayerEndPointPosition = aimGranatePos.position,
-                shootPosition = mousePosition,
-            });
-        }
-
-        if (weaponPatrons <= 0 && Input.GetMouseButtonDown(0) && !ActualReload)
-        {
-            RealodAnim.SetTrigger("Patrons");
-            ActualReload = true;
-            Reload.Play();
-        }
-
-        if (timebet < 0)
-        {
-            cam.SetBool("ShootCam", false);
-            gunLight[currentGun].SetActive(false);
+            minDistance = distance;
+            closestEnemy = enemy.transform;
         }
     }
+
+    if (closestEnemy != null)
+    {
+        return closestEnemy.position;
+    }
+
+    // Если врагов нет — просто стреляем по центру экрана или вперёд
+    return Camera.main.ScreenToWorldPoint(new Vector3(Screen.width / 2, Screen.height / 2, 10f));
+}
+
 
     private void GranadeExplosion() => Granade.Play();
 
