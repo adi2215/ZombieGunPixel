@@ -267,6 +267,10 @@ MonoBehaviour:
   currentSpeed: 0
   speed: 0
   enemySound: {fileID: 8742574170961593691}
+  audioClips:
+  - {fileID: 8300000, guid: 74200bc3cd6d2c144845ea0451edc370, type: 3}
+  - {fileID: 8300000, guid: 73b8de2706c304341a943213ee666932, type: 3}
+  - {fileID: 8300000, guid: 04f13681f6169cd4f9552c5b9a7afbd0, type: 3}
 --- !u!95 &627912399448538374
 Animator:
   serializedVersion: 5
@@ -819,7 +823,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b41c9dc269e64c49ad56a517e1138a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 2
+  health: 1
   effect: {fileID: 5800905953750762035, guid: 5a208ad3717aecd4da58a6efb5e00012, type: 3}
   parentObject: {fileID: 4129162895743158574}
   coins: {fileID: 5786879929547647122, guid: 5d8cc1b96ee474942be5455696859c73, type: 3}
@@ -827,6 +831,5 @@ MonoBehaviour:
   rb: {fileID: 2706697681028130960}
   colliderCps: {fileID: 8861110234097013361}
   healthBoss: {fileID: 0}
-  data: {fileID: 11400000, guid: 116af9e09d2b903408fa652bf01ba357, type: 2}
+  data: {fileID: 0}
   sceneNew: {fileID: 0}
-  text: {fileID: 0}

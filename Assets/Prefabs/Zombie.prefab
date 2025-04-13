@@ -150,6 +150,10 @@ MonoBehaviour:
   currentSpeed: 2
   speed: 2
   enemySound: {fileID: 2306357002141975082}
+  audioClips:
+  - {fileID: 8300000, guid: 74200bc3cd6d2c144845ea0451edc370, type: 3}
+  - {fileID: 8300000, guid: 73b8de2706c304341a943213ee666932, type: 3}
+  - {fileID: 8300000, guid: 04f13681f6169cd4f9552c5b9a7afbd0, type: 3}
 --- !u!70 &7674246072961120811
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -710,7 +714,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b41c9dc269e64c49ad56a517e1138a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 3
+  health: 2
   effect: {fileID: 5800905953750762035, guid: 5a208ad3717aecd4da58a6efb5e00012, type: 3}
   parentObject: {fileID: 3620831307165175572}
   coins: {fileID: 5786879929547647122, guid: 5d8cc1b96ee474942be5455696859c73, type: 3}
@@ -718,6 +722,5 @@ MonoBehaviour:
   rb: {fileID: 3849577934213840047}
   colliderCps: {fileID: 3163611654020658363}
   healthBoss: {fileID: 0}
-  data: {fileID: 11400000, guid: 116af9e09d2b903408fa652bf01ba357, type: 2}
+  data: {fileID: 0}
   sceneNew: {fileID: 0}
-  text: {fileID: 0}
